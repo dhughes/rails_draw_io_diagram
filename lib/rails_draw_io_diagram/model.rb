@@ -27,13 +27,10 @@ module RailsDrawIoDiagram
 
     def foreign_keys
       belongs_tos.map do |belongs_to|
-        binding.pry
-        # RailsDrawIoDiagram::ForeignKey.new(
-        {
+        RailsDrawIoDiagram::ForeignKey.new(
           from_field: field(belongs_to.foreign_key),
           to_field: RailsDrawIoDiagram::ModelRegistry.model(belongs_to.class_name).field('id')
-        #)
-        }
+        )
       end
     end
 

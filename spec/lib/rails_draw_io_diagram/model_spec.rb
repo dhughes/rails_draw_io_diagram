@@ -31,6 +31,8 @@ RSpec.describe RailsDrawIoDiagram::Model do
     model = RailsDrawIoDiagram::Model.new(model: Campaign)
 
     expect(model.foreign_keys.map(&:from_field).map(&:field_name)).to eq(%w(partner_id vertical_id))
+    expect(model.foreign_keys.map(&:to_field).map(&:field_name)).to eq(%w(id id))
+    expect(model.foreign_keys.map(&:to_field).map(&:model).map(&:class_name)).to eq(%w(Partner Vertical))
   end
 
 end
