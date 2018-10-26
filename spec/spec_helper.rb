@@ -1,7 +1,8 @@
 require "bundler/setup"
 require 'pry-byebug'
-require "rails_draw_io_diagram"
-require "mock_rails_app"
+require 'rails_draw_io_diagram'
+require 'mock_rails_app'
+require 'samples'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -13,4 +14,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include Samples
 end

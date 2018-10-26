@@ -1,8 +1,9 @@
 module RailsDrawIoDiagram
   class Model
-    attr_accessor :model
+    attr_accessor :id, :model
 
     def initialize(model:)
+      @id = RailsDrawIoDiagram::Sequence.next_id
       @model = model
       RailsDrawIoDiagram::ModelRegistry.add(self)
     end

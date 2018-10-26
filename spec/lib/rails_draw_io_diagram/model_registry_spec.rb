@@ -4,11 +4,19 @@ RSpec.describe RailsDrawIoDiagram::ModelRegistry do
   end
 
   it 'holds a registry of models' do
-    RailsDrawIoDiagram::ModelRegistry.add(RailsDrawIoDiagram::Model.new(model: Campaign))
+    RailsDrawIoDiagram::ModelRegistry.reset
+    RailsDrawIoDiagram::Model.new(model: Campaign)
     model = RailsDrawIoDiagram::Model.new(model: Partner)
-    RailsDrawIoDiagram::ModelRegistry.add(model)
 
     expect(RailsDrawIoDiagram::ModelRegistry.model('Partner')).to eq(model)
+  end
+
+  it 'has a set of models' do
+    RailsDrawIoDiagram::ModelRegistry.reset
+    RailsDrawIoDiagram::Model.new(model: Campaign)
+    RailsDrawIoDiagram::Model.new(model: Partner)
+
+    expect(RailsDrawIoDiagram::ModelRegistry.models.size).to eq(2)
   end
 
 end
