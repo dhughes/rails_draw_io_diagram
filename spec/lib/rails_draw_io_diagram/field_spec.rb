@@ -5,7 +5,6 @@ RSpec.describe RailsDrawIoDiagram::Field do
   end
 
   it 'gets a unique id' do
-    RailsDrawIoDiagram::Sequence.reset
     model = RailsDrawIoDiagram::Model.new(model: Campaign)
     field1 = RailsDrawIoDiagram::Field.new(field_name: 'example1', model: model)
     field2 = RailsDrawIoDiagram::Field.new(field_name: 'example2', model: model)

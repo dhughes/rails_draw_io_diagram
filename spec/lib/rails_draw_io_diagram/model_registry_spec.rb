@@ -4,7 +4,6 @@ RSpec.describe RailsDrawIoDiagram::ModelRegistry do
   end
 
   it 'holds a registry of models' do
-    RailsDrawIoDiagram::ModelRegistry.reset
     RailsDrawIoDiagram::Model.new(model: Campaign)
     model = RailsDrawIoDiagram::Model.new(model: Partner)
 
@@ -12,7 +11,6 @@ RSpec.describe RailsDrawIoDiagram::ModelRegistry do
   end
 
   it 'has a set of models' do
-    RailsDrawIoDiagram::ModelRegistry.reset
     RailsDrawIoDiagram::Model.new(model: Campaign)
     RailsDrawIoDiagram::Model.new(model: Partner)
 

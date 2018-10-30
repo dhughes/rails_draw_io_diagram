@@ -4,7 +4,6 @@ RSpec.describe RailsDrawIoDiagram::Sequence do
   end
 
   it 'returns sequential ids' do
-    RailsDrawIoDiagram::Sequence.reset
     expect(RailsDrawIoDiagram::Sequence.next_id).to eq(1)
     expect(RailsDrawIoDiagram::Sequence.next_id).to eq(2)
   end
@@ -19,15 +18,11 @@ RSpec.describe RailsDrawIoDiagram::Sequence do
   end
 
   it 'can create a root id' do
-    RailsDrawIoDiagram::Sequence.reset
-
     expect(RailsDrawIoDiagram::Sequence.root_id).to eq(1)
     expect(RailsDrawIoDiagram::Sequence.root_id).to eq(1)
   end
 
   it 'can create a base parent id' do
-    RailsDrawIoDiagram::Sequence.reset
-
     expect(RailsDrawIoDiagram::Sequence.base_parent_id).to eq(1)
     expect(RailsDrawIoDiagram::Sequence.base_parent_id).to eq(1)
   end

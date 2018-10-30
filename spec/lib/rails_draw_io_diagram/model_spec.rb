@@ -35,4 +35,10 @@ RSpec.describe RailsDrawIoDiagram::Model do
     expect(model.foreign_keys.map(&:to_field).map(&:model).map(&:class_name)).to eq(%w(Partner Vertical))
   end
 
+  it 'can generate an xml fragment' do
+    model = RailsDrawIoDiagram::Model.new(model: Vertical)
+
+    expect(model.to_xml.to_xml).to eq(samples.single_table_fragment)
+  end
+
 end

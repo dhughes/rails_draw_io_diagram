@@ -16,4 +16,9 @@ RSpec.configure do |config|
   end
 
   config.include Samples
+
+  config.before(:each) do
+    RailsDrawIoDiagram::ModelRegistry.reset
+    RailsDrawIoDiagram::Sequence.reset
+  end
 end
