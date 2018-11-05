@@ -12,8 +12,8 @@ RSpec.describe RailsDrawIoDiagram::Diagram do
   end
 
   it 'creates xml for multiple models' do
-    diagram = RailsDrawIoDiagram::Diagram.new(models: [Vertical, Partner])
-
+    diagram = RailsDrawIoDiagram::Diagram.new(models: [Campaign, Partner, Vertical, PartnerAutomationSetting, RealEstateAgent, Listing])
+    IO.popen('pbcopy', 'w') { |f| f << diagram.database_xml }
     expect(diagram.database_xml).to eq(samples.multiple_table_diagram)
   end
 end

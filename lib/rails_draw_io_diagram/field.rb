@@ -2,30 +2,24 @@ module RailsDrawIoDiagram
   class Field
     attr_accessor :id, :field_name, :model, :foreign_key
 
-    def initialize(field_name:, model:, foreign_key:)
+    def initialize(field_name:, model:)
       @id = RailsDrawIoDiagram::Sequence.next_id
       @field_name = field_name
       @model = model
-      @foreign_key = foreign_key
     end
 
     def key_type
       return 'PK' if primary_key?
       return 'FK' if foreign_key?
-      return 'rk' if remote_key?
       ''
     end
 
     def primary_key?
-      field_name == 'id'
+      field_name == model.model.primary_key
     end
 
     def foreign_key?
-      foreign_key
-    end
-
-    def remote_key?
-      field_name =~ /^.*_id$/
+      model.foreign_key(field_name).present?
     end
 
   end

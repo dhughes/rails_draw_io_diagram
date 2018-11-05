@@ -41,4 +41,36 @@ RSpec.describe RailsDrawIoDiagram::Model do
     expect(model.to_xml.to_xml).to eq(samples.single_table_fragment)
   end
 
+  context "when a model doesn't have any foreign keys" do
+    it 'is a leaf' do
+      model = RailsDrawIoDiagram::Model.new(model: Listing)
+
+      expect(model.leaf?).to eq(true)
+    end
+  end
+
+  context "when a model has a foreign key" do
+    it 'is not a leaf' do
+      RailsDrawIoDiagram::Model.new(model: Vertical)
+      model = RailsDrawIoDiagram::Model.new(model: Campaign)
+
+      expect(model.leaf?).to eq(false)
+    end
+  end
+
+  it "knows about referencing associations" do
+    model = RailsDrawIoDiagram::Model.new(model: Vertical)
+    RailsDrawIoDiagram::Model.new(model: Campaign)
+    RailsDrawIoDiagram::Model.new(model: Partner)
+
+    expect(model.referenced_by.size).to eq(2)
+  end
+
+  it "knows how all of its incoming and outgoing foreign key associations" do
+    model = RailsDrawIoDiagram::Model.new(model: Vertical)
+    RailsDrawIoDiagram::Model.new(model: Campaign)
+    RailsDrawIoDiagram::Model.new(model: Partner)
+
+    expect(model.associations.size).to eq(2)
+  end
 end

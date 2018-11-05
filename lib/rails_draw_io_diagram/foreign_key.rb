@@ -7,5 +7,13 @@ module RailsDrawIoDiagram
       @from_field = from_field
       @to_field = to_field
     end
+
+    def from_id
+      from_field.id
+    end
+
+    def to_id
+      to_field.id
+    end
   end
 end
