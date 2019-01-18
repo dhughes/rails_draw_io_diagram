@@ -9,6 +9,12 @@ module RailsDrawIoDiagram
 
     def self.reset
       @@id = 0
+      @@root_id = nil
+      @@base_parent_id = nil
+    end
+
+    def self.current_id
+      @@id
     end
 
     def self.root_id

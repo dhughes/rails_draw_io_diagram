@@ -9,8 +9,7 @@ RSpec.describe RailsDrawIoDiagram::Field do
     field1 = RailsDrawIoDiagram::Field.new(field_name: 'example1', model: model)
     field2 = RailsDrawIoDiagram::Field.new(field_name: 'example2', model: model)
 
-    expect(field1.id).to eq(1)
-    expect(field2.id).to eq(2)
+    expect(field1.id).not_to eq(field2.id)
   end
 
   it 'knows the model it belongs to' do
