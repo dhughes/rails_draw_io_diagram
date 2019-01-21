@@ -47,12 +47,13 @@ module RailsDrawIoDiagram
                 end
           else
             to_model = RailsDrawIoDiagram::ModelRegistry.model(belongs_to.class_name)
+            next unless to_model
             RailsDrawIoDiagram::ForeignKey.new(
               from_field: field(belongs_to.foreign_key),
               to_field: to_model.field(to_model.model.primary_key)
             )
           end
-        end.flatten
+        end.flatten.compact
       end
     end
 
@@ -93,6 +94,23 @@ module RailsDrawIoDiagram
 
     def leaf?
       foreign_keys.empty?
+    end
+
+    def referenced_by
+      @referenced_by ||= RailsDrawIoDiagram::ModelRegistry.models.select do |model|
+        false if model == self
+        model.foreign_keys.first do |foreign_key|
+          foreign_key.to_field.model == self
+        end.present?
+      end
+    end
+
+    def associations
+      @associations ||= RailsDrawIoDiagram::ModelRegistry.models.map do |model|
+        model.foreign_keys.select do |foreign_key|
+          foreign_key.to_field.model == self || foreign_key.from_field.model
+        end
+      end.flatten.uniq
     end
 
     private

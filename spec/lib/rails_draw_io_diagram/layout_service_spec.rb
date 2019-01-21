@@ -10,4 +10,8 @@ RSpec.describe RailsDrawIoDiagram::LayoutService do
 
     expect(service.trim).to eq([models.first])
   end
+
+  it 'can identify two models that only refer to each other'
+
+  it 'can identify three models that only refer to each other'
 end
