@@ -66,7 +66,7 @@ module RailsDrawIoDiagram
 
       Nokogiri::XML::Builder.with(fragment) do |fragment|
         fragment.mxCell(id: id, value: table_name, style: title_style, vertex: 1, parent: Sequence.base_parent_id) do
-          fragment.mxGeometry(x: (id * 240 + (id * 80)) - 320, y: 0, width: MODEL_WIDTH, height: height, as: 'geometry')
+          fragment.mxGeometry(x: (id * 240 + (id * 80)) - 320, y: 0, width: width, height: height, as: 'geometry')
         end
 
         fields.each_with_index do |field, index|
@@ -88,10 +88,6 @@ module RailsDrawIoDiagram
       fragment
     end
 
-    def height
-      (fields.size + 1) * FIELD_HEIGHT
-    end
-
     def leaf?
       foreign_keys.empty?
     end
@@ -111,6 +107,14 @@ module RailsDrawIoDiagram
           foreign_key.to_field.model == self || foreign_key.from_field.model
         end
       end.flatten.uniq
+    end
+
+    def width
+      MODEL_WIDTH
+    end
+
+    def height
+      (fields.count + 1) * FIELD_HEIGHT
     end
 
     private

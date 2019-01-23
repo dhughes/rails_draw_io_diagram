@@ -4,6 +4,8 @@ module RailsDrawIoDiagram
   class Diagram
     attr_accessor :diagram, :root, :models
 
+    CELL_MINIMUM_DISTANCE = 80
+
     def initialize(models:)
       load_models(models)
     end
@@ -27,6 +29,16 @@ module RailsDrawIoDiagram
       end
 
       URI::encode(builder.to_xml)
+    end
+
+    def minimum_cell_length
+      # iterate over all models and find the minimum width
+      [models.map(&:width).min, models.map(&:height).min].min + CELL_MINIMUM_DISTANCE
+    end
+
+    def maximum_cell_length
+      # iterate over all models and find the minimum width
+      [models.map(&:width).max, models.map(&:height).max].max + CELL_MINIMUM_DISTANCE
     end
 
     private

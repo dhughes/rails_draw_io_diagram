@@ -20,4 +20,18 @@ RSpec.describe RailsDrawIoDiagram::Diagram do
     expect(diagram.database_xml).to be_present
     #expect(diagram.database_xml).to eq(samples.multiple_table_diagram)
   end
+
+  it 'calculate the minimum cell length' do
+    diagram = RailsDrawIoDiagram::Diagram.new(models: [Campaign, Partner, Vertical, PartnerAutomationSetting, RealEstateAgent, Listing])
+
+    expect(diagram.minimum_cell_length).to eq(170)
+  end
+
+  it 'calculate the maximum cell length' do
+    diagram = RailsDrawIoDiagram::Diagram.new(models: [Campaign, Partner, Vertical, PartnerAutomationSetting, RealEstateAgent, Listing])
+
+    expect(diagram.maximum_cell_length).to eq(350)
+  end
+
+
 end

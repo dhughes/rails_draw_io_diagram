@@ -74,4 +74,17 @@ RSpec.describe RailsDrawIoDiagram::Model do
 
     expect(model.associations.size).to eq(3)
   end
+
+  it 'knows its width' do
+    model = RailsDrawIoDiagram::Model.new(model: Campaign)
+
+    expect(model.width).to eq(RailsDrawIoDiagram::Model::MODEL_WIDTH)
+  end
+
+  it 'knows its height' do
+    model = RailsDrawIoDiagram::Model.new(model: Campaign)
+
+    # Campaign has 8 fields
+    expect(model.height).to eq(270)
+  end
 end
